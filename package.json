@@ -1,0 +1,98 @@
+{
+  "name": "react-template",
+  "version": "0.0.1",
+  "description": "Simple template for setting up project using react and redux.",
+  "main": "index.js",
+  "author": "Atif Faiyaz",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "webpack-dev-server"
+  },
+  "dependencies": {
+    "history": "^4.7.2",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
+    "react-router-dom": "^4.2.2",
+    "redux": "^3.7.2",
+    "webpack": "^3.10.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.35",
+    "@babel/preset-env": "^7.0.0-beta.35",
+    "@babel/preset-react": "^7.0.0-beta.35",
+    "babel-loader": "8.0.0-beta.0",
+    "eslint": "^4.13.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-import-resolver-webpack": "^0.8.3",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-prettier": "^2.4.0",
+    "eslint-plugin-react": "^7.5.1",
+    "file-loader": "^1.1.6",
+    "html-webpack-plugin": "^2.30.1",
+    "prettier": "^1.9.2",
+    "style-loader": "^0.19.1",
+    "url-loader": "^0.6.2",
+    "webpack-dev-server": "^2.9.7"
+  },
+  "eslintConfig": {
+    "extends": [
+      "airbnb",
+      "prettier",
+      "prettier/react"
+    ],
+    "rules": {
+      "react/no-string-refs": "off",
+      "react/no-unused-prop-types": "off",
+      "import/no-unresolved": 0,
+      "import/extensions": 0,
+      "prettier/prettier": [
+        "error",
+        {
+          "singleQuote": true,
+          "trailingComma": "all"
+        }
+      ],
+      "no-console": "off",
+      "import/no-extraneous-dependencies": "off",
+      "react/jsx-filename-extension": [
+        1,
+        {
+          "extensions": [
+            ".js",
+            ".jsx"
+          ]
+        }
+      ],
+      "react/jsx-wrap-multilines": "off",
+      "arrow-parens": [
+        "error",
+        "as-needed"
+      ],
+      "jsx-a11y/anchor-is-valid": [
+        "error", {
+          "components": [ "Link" ],
+          "specialLink": [ "to", "hrefLeft", "hrefRight" ],
+          "aspects": [ "noHref", "invalidHref", "preferButton" ]
+        }
+      ]
+    },
+    "plugins": [
+      "prettier"
+    ],
+    "settings": {
+      "import/resolver": [
+        "webpack"
+      ]
+    },
+    "env": {
+      "browser": true
+    },
+    "globals": {
+      "fetch": true
+    }
+  }
+}
