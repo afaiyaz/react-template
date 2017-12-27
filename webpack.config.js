@@ -19,6 +19,7 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
+            babelrc: false,
             presets: [
               [
                 '@babel/preset-env',
@@ -27,6 +28,7 @@ module.exports = {
                     browsers: ['last 2 Chrome versions'],
                   },
                   debug: true,
+                  useBuiltIns: 'entry',
                 },
               ],
               '@babel/preset-react',
