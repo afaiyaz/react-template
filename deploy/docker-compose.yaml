@@ -1,0 +1,7 @@
+version: '3'
+services:
+  react-template:
+      image: react-template
+      network_mode: "bridge"
+      ports:
+        - 80:80

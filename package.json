@@ -8,7 +8,10 @@
   "private": true,
   "scripts": {
     "start": "webpack-dev-server",
-    "test": "nyc ava"
+    "build": "webpack",
+    "test": "nyc ava",
+    "up": "docker build . -t react-template && docker-compose --file deploy/docker-compose.yaml up",
+    "up:d": "yarn up -d"
   },
   "dependencies": {
     "history": "^4.7.2",
