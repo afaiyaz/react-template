@@ -1,0 +1,82 @@
+pipeline {
+  agent { node { label 'web-jenkins-agent-1' } }
+  tools {
+    nodejs 'node-js-3'
+  }
+  stages{
+    stage('Initializing'){
+      steps {
+        notify('started')
+      }
+    }
+
+    
+
+    stage('Lint') {
+      steps{
+        sh 'yarn lint'
+      }
+    }
+
+    stage('Test') {
+      steps{
+        sh 'yarn test'
+      }
+    }
+
+    stage('Bundle') {
+      steps{
+        sh 'yarn build'
+      }
+    }
+
+    stage('Start Container') {
+      when {
+        branch 'master'
+      }
+      steps {
+        echo 'Starting container...'
+        sh 'yarn up:d'
+      }
+    }
+  }
+  post {
+    success {
+      notify('success')
+    }
+    failure {
+      notify('failure')
+    }
+  }
+
+}
+
+
+def notify(status){
+  GIT_COMMIT_SUBJECT= sh (
+    script: "git --no-pager show -s --format='%s'",
+    returnStdout: true
+  ).trim()
+  def GIT_LAST_COMMIT_HASH = sh(
+    script: 'git rev-parse HEAD',
+    returnStdout: true
+  )
+  GIT_LAST_COMMIT_AUTHOR = sh(
+    script: "git --no-pager show -s --format='%an' ${GIT_LAST_COMMIT_HASH}",
+    returnStdout: true
+  ).trim()
+
+  switch(status) {
+    case 'success':
+      slackSend (color: '#00B300', message: "SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' with latest commit ${GIT_LAST_COMMIT_AUTHOR}: ${GIT_COMMIT_SUBJECT}")
+      break
+    case 'started':
+      slackSend (color: '#FFFF00', message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' with latest commit ${GIT_LAST_COMMIT_AUTHOR}: ${GIT_COMMIT_SUBJECT}")
+      break
+    case 'failure':
+      slackSend (color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' with latest commit ${GIT_LAST_COMMIT_AUTHOR}: ${GIT_COMMIT_SUBJECT}")
+      break
+    default:
+      slackSend (color: '#FF0000', message: "UNKNOWN: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' with latest commit ${GIT_LAST_COMMIT_AUTHOR}: ${GIT_COMMIT_SUBJECT}")
+  }
+}
