@@ -1,4 +1,3 @@
-const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -33,6 +32,7 @@ module.exports = {
               ],
               '@babel/preset-react',
             ],
+            plugins: ['@babel/plugin-proposal-object-rest-spread'],
           },
         },
       },
