@@ -7,8 +7,9 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server --hot",
     "build": "webpack",
+    "lint": "eslint src/",
     "test": "nyc ava",
     "up": "docker build . -t react-template && docker-compose --file deploy/docker-compose.yaml up",
     "up:d": "yarn up -d"
@@ -24,14 +25,16 @@
   },
   "devDependencies": {
     "@ava/babel-preset-stage-4": "^1.1.0",
-    "@babel/core": "^7.0.0-beta.35",
-    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.35",
-    "@babel/polyfill": "^7.0.0-beta.35",
-    "@babel/preset-env": "^7.0.0-beta.35",
-    "@babel/preset-react": "^7.0.0-beta.35",
-    "@babel/register": "^7.0.0-beta.35",
+    "@babel/core": "^7.0.0-beta.42",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.42",
+    "@babel/polyfill": "^7.0.0-beta.42",
+    "@babel/preset-env": "^7.0.0-beta.42",
+    "@babel/preset-react": "^7.0.0-beta.42",
+    "@babel/register": "^7.0.0-beta.42",
     "ava": "^0.24.0",
-    "babel-loader": "8.0.0-beta.0",
+    "babel-eslint": "^8.2.2",
+    "babel-loader": "^8.0.0-beta",
+    "css-loader": "^0.28.11",
     "eslint": "^4.13.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-prettier": "^2.9.0",
@@ -62,6 +65,7 @@
     ]
   },
   "eslintConfig": {
+    "parser": "babel-eslint",
     "extends": [
       "airbnb",
       "prettier",
@@ -95,24 +99,7 @@
         "error",
         "as-needed"
       ],
-      "jsx-a11y/anchor-is-valid": [
-        "error",
-        {
-          "components": [
-            "Link"
-          ],
-          "specialLink": [
-            "to",
-            "hrefLeft",
-            "hrefRight"
-          ],
-          "aspects": [
-            "noHref",
-            "invalidHref",
-            "preferButton"
-          ]
-        }
-      ]
+      "jsx-a11y/anchor-is-valid": "off"
     },
     "plugins": [
       "prettier"
