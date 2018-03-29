@@ -5,8 +5,9 @@ import styles from './LandingPage.css';
 export default () => (
   <>
     <div className={styles.header}>Welcome to React Template</div>
-    <div>
-      <Link to="/pageB">PageB</Link>
+    <Link to="/pageB">PageB</Link>
+    <div className={styles.welcome}>
+      <img src="/public/welcome.png" alt="welcome" />
     </div>
   </>
 );
