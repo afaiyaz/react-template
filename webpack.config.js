@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 
 const configLookup = {
   [process.env.NODE_ENV]: 'development',
