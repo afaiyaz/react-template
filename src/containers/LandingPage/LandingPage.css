@@ -1,0 +1,11 @@
+.header{
+  display: flex;
+  height: 100px;
+  justify-content: center;
+  align-items: center;
+}
+
+.welcome{
+  display: flex;
+  justify-content: center;
+}

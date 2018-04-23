@@ -1,5 +1,12 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const configLookup = {
+  [process.env.NODE_ENV]: 'development',
+  development: 'development',
+  'quality-assurance': 'quality-assurance',
+  prod: 'prod',
+}[process.env.NODE_ENV];
+console.log(configLookup);
 module.exports = {
   entry: `${process.cwd()}/src/index.js`,
   output: {
@@ -9,6 +16,9 @@ module.exports = {
   },
   resolve: {
     modules: [`${process.cwd()}/src`, 'node_modules'],
+    alias: {
+      config: path.join(__dirname, 'config',configLookup),
+    },
   },
   module: {
     rules: [
